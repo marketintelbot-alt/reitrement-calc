@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Retirement Calculator</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <main class="page">
+    <section class="panel">
+      <h1>Retirement Calculator</h1>
+      <p class="intro">Project retirement savings growth and estimate income in both nominal and today's dollars.</p>
+
+      <div id="engineStatus" class="engine-status" aria-live="polite">
+        <span class="spinner" aria-hidden="true"></span>
+        <span>Loading Python engine...</span>
+      </div>
+
+      <form id="calcForm" novalidate>
+        <div class="grid">
+          <label>Current Age
+            <input id="current_age" type="number" min="18" max="90" value="32" required />
+          </label>
+          <label>Retirement Age
+            <input id="retirement_age" type="number" min="19" max="100" value="67" required />
+          </label>
+          <label>Current Savings ($)
+            <input id="current_savings" type="number" min="0" step="0.01" value="85000" required />
+          </label>
+          <label>Monthly Contribution ($)
+            <input id="monthly_contribution" type="number" min="0" step="0.01" value="900" required />
+          </label>
+          <label>Expected Return (%)
+            <input id="expected_return_percent" type="number" min="0" max="20" step="0.01" value="6.5" required />
+          </label>
+          <label>Inflation (%)
+            <input id="inflation_percent" type="number" min="0" max="15" step="0.01" value="2.5" required />
+          </label>
+          <label>Withdrawal Rate (%)
+            <input id="withdrawal_rate_percent" type="number" min="1" max="10" step="0.01" value="4" required />
+          </label>
+          <label>Target Monthly Income in Retirement ($, optional)
+            <input id="target_monthly_income" type="number" min="0" step="0.01" value="5000" />
+          </label>
+        </div>
+
+        <div class="actions">
+          <button id="calcButton" type="submit" disabled>Project</button>
+          <button id="copyButton" type="button" disabled>Copy Results</button>
+        </div>
+        <p id="errorBox" class="error" role="alert"></p>
+      </form>
+
+      <section id="results" class="results" hidden>
+        <p id="balanceOut" class="metric"></p>
+        <p id="incomeNominalOut" class="metric"></p>
+        <p id="incomeTodayOut" class="metric"></p>
+        <p id="trackOut" class="track"></p>
+      </section>
+
+      <p class="disclaimer">Estimates only. Not financial advice.</p>
+    </section>
+  </main>
+</body>
+</html>
